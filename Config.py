@@ -67,12 +67,3 @@ class Config:
         """Завантажує конфігурацію, або створює файл з дефолтними значеннями."""
         with open(path, "r", encoding="utf-8") as f:
             return json.load(f)
-
-    
-
-# Config.create()
-# print(Config.load())
-
-# # Використання
-# config = load_or_create_config()
-# print(config["day_names"]["Пн"])
