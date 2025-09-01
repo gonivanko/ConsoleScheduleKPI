@@ -1,14 +1,11 @@
 import json
 import os
 import requests
-from datetime import datetime
 
 
 class CampusAPI:
     BASE_URL = "https://api.campus.kpi.ua"
     CACHE_DIR = "data"
-    # CACHE_TTL_GROUPS = timedelta(days=365)  # список груп зберігається рік
-    # CACHE_TTL_SCHEDULE = timedelta(hours=24) # розклад оновлюється раз на 6 годин
 
     @classmethod
     def _get(this, path: str, **params):
@@ -27,8 +24,6 @@ class CampusAPI:
         if not os.path.exists(path):
             return None
         
-        mtime = datetime.fromtimestamp(os.path.getmtime(path))
-        # cache_is_old = (datetime.now() - mtime > ttl)
         with open(path, "r", encoding="utf-8") as f:
             return json.load(f)
 
@@ -38,7 +33,6 @@ class CampusAPI:
         with open(path, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4)
 
-    # --- Groups ---
     @classmethod
     def groups_list(this):
         cache = this._load_cache("groups")
@@ -56,7 +50,6 @@ class CampusAPI:
                 return group["id"]
         return None
 
-    # --- Schedule ---
     @classmethod
     def group_schedule(this, group_id: str):
         cache_name = f"schedule_{group_id}"
