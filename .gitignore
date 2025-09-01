@@ -1,6 +1,7 @@
 *.pyc
 *.pyo
 *.spec
+*.xml
 __pycache__/
 config/*
 data/*
