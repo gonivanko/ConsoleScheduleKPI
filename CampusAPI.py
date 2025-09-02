@@ -41,6 +41,11 @@ class CampusAPI:
         data = this._get("schedule/groups")
         this._save_cache("groups", data)
         return data
+    
+    @classmethod
+    def current_time(this):
+        data = this._get("time/current")
+        return data
 
     @classmethod
     def find_group_id(this, group_name: str):
